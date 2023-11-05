@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Carrusel de Imágenes</title>
+  <style>
+    .carousel-container {
+      position: relative;
+      width: 600px;
+      margin: 0 auto;
+    }
+    
+    .carousel-slide {
+      display: none;
+      width: 100%;
+    }
+    
+    .carousel-slide img {
+      width: 100%;
+      height: auto;
+    }
+    
+    .carousel-buttons {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    
+    .carousel-button {
+      background: transparent;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    .carousel-button.next {
+      float: right;
+    }
+  </style>
+</head>
+<body>
+  <div class="carousel-container">
+    <div class="carousel-slide">
+      <img src="imagen1.jpg" alt="Imagen 1">
+    </div>
+    <div class="carousel-slide">
+      <img src="imagen2.jpg" alt="Imagen 2">
+    </div>
+    <div class="carousel-slide">
+      <img src="imagen3.jpg" alt="Imagen 3">
+    </div>
+    <button class="carousel-button prev">&#9664;</button>
+    <button class="carousel-button next">&#9654;</button>
+  </div>
+  
+  <script>
+    let slideIndex = 0;
+    showSlide(slideIndex);
+
+    function showSlide(n) {
+      const slides = document.getElementsByClassName("carousel-slide");
+      if (n >= slides.length) {
+        slideIndex = 0;
+      }
+      if (n < 0) {
+        slideIndex = slides.length - 1;
+      }
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slides[slideIndex].style.display = "block";
+    }
+
+    function changeSlide(n) {
+      showSlide(slideIndex += n);
+    }
+
+    const prevButton = document.querySelector(".carousel-button.prev");
+    const nextButton = document.querySelector(".carousel-button.next");
+
+    prevButton.addEventListener("click", () => changeSlide(-1));
+    nextButton.addEventListener("click", () => changeSlide(1));
+  </script>
+</body>
+</html>
